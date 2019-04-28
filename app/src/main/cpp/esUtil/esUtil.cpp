@@ -8,6 +8,12 @@
 
 #include "esUtil.h"
 
+/**
+ * 在日志中记录错误情况
+ * @param funcName 出现在日志中的函数名称
+ * @callgraph
+ * @return 是否存在错误
+ */
 bool checkGlError(const char* funcName) {
     GLint err = glGetError();
     if (err != GL_NO_ERROR) {
@@ -17,6 +23,13 @@ bool checkGlError(const char* funcName) {
     return false;
 }
 
+/**
+ * 按照源代码创建一个相应类型的着色器
+ * @author zLeoAlex
+ * @param shaderType 着色器类型(顶点or片元)
+ * @param src 相应的代码
+ * @return 成功则为着色器编号，失败则为0
+ */
 GLuint createShader(GLenum shaderType, const char* src) {
     GLuint shader = glCreateShader(shaderType);
     if (!shader) {
@@ -28,10 +41,11 @@ GLuint createShader(GLenum shaderType, const char* src) {
     GLint compiled = GL_FALSE;
 
     glCompileShader(shader);
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled); /// 获取编译结果
 
-    if (compiled) return shader;
+    if (compiled) return shader; ///编译成功
 
+    /// 编译失败，获取错误信息
     GLint infoLogLen = 0;
     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLogLen);
     if (infoLogLen > 0) {
@@ -50,6 +64,12 @@ GLuint createShader(GLenum shaderType, const char* src) {
     return 0;
 }
 
+/**
+ * 通过顶点着色器和片元着色器源码构造渲染程序
+ * @param vtxSrc 顶点着色器源码
+ * @param fragSrc 片元着色器源码
+ * @return 程序编号，失败为0
+ */
 GLuint createProgram(const char* vtxSrc, const char* fragSrc) {
     GLuint vtxShader = 0,
             fragShader = 0,
@@ -88,6 +108,13 @@ GLuint createProgram(const char* vtxSrc, const char* fragSrc) {
     return program;
 }
 
+/**
+ * 通过顶点着色器和片元着色器源码构造渲染程序
+ * @param env JNI环境
+ * @param vtxSrc 顶点着色器源码
+ * @param fragSrc 片元着色器源码
+ * @return 程序编号，失败为0
+ */
 GLuint createProgram(JNIEnv * env,jstring vtxSrc, jstring fragSrc) {
     const char
         *vtx = env->GetStringUTFChars(vtxSrc, nullptr),

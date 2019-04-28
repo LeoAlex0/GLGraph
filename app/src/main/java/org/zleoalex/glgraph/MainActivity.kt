@@ -7,6 +7,9 @@ import org.zleoalex.glgraph.gl.renderer.MazeRenderer
 
 class MainActivity : AppCompatActivity() {
 
+    /**
+     * 应用启动时调用，构造一个[MazeRenderer]绑定到[GL2SurfaceView]作为整个应用的根视图
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(GL2SurfaceView(applicationContext,MazeRenderer(

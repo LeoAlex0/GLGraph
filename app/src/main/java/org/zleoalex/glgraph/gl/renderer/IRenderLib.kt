@@ -2,6 +2,10 @@ package org.zleoalex.glgraph.gl.renderer
 
 import android.opengl.GLSurfaceView.Renderer
 
+/**
+ * 使用JNI交给C++部分实现的代码的接口
+ * @author zLeoAlex
+ */
 interface IRenderLib {
     /**
      * 初始化(着色器的编译与链接)，对应[Renderer.onSurfaceCreated]
