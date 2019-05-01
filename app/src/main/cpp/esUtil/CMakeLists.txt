@@ -35,7 +35,6 @@ link_libraries(
 include_directories(include)
 add_library(esUtil SHARED esUtil.cpp)
 
-link_libraries(esUtil)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by

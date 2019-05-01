@@ -37,6 +37,8 @@ class MazeRenderer(private val vtxShader: String = "", private val fragShader: S
     external override fun resize(width: Int, height: Int)
     external override fun step()
 
+    external fun refresh()
+
     init {
         System.loadLibrary("mazeLib")
     }

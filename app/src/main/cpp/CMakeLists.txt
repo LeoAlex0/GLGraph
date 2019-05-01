@@ -13,8 +13,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED 17)
 
 add_subdirectory(esUtil)
 
-link_libraries(esUtil)
-
 include_directories(esUtil/include)
-
-add_library(mazeLib SHARED mazeLib/mazeLib.cpp)
+link_libraries(esUtil android GLESv3 EGL log m)
+add_subdirectory(mazeLib)
