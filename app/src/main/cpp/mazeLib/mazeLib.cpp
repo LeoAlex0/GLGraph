@@ -81,8 +81,8 @@ MAZE_RENDERER(step) (JNIEnv *env, jobject) {
     glUniformMatrix4fv(spinMatHandler,1,GL_FALSE,matrix.data());
 
     glEnableVertexAttribArray(positionHanderler);
-    glVertexAttribPointer(positionHanderler,elemOfCoord,GL_FLOAT,GL_FALSE,vertexStride,points);
 
+    glVertexAttribPointer(positionHanderler,elemOfCoord,GL_FLOAT,GL_FALSE,vertexStride,points);
     glDrawElements(GL_LINES,6,GL_UNSIGNED_SHORT,drawIndices);
 }
 }
