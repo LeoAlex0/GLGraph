@@ -27,7 +27,7 @@ namespace mazeModel {
          * @param gen 生成式集合
          * @return 一个点序列一个下标序列
          */
-        tuple<vector<Point>, vector<short>> (*getMaze)(multimap<char, string> const &gen);
+        tuple<vector<Point>, vector<unsigned short>> (*getMaze)(multimap<char, string> const &gen);
     } mazeGenerator;
 
     multimap<char, string> lex;

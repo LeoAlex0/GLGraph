@@ -5,7 +5,7 @@
 #include <mazeModel.h>
 
 namespace mazeModel {
-    MazeModel::MazeModel() = default {
+    MazeModel::MazeModel() {
         tie(points,indecies) = mazeGenerator.getMaze(lex);
     }
 
