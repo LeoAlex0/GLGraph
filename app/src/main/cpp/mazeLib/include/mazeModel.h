@@ -7,9 +7,11 @@
 
 #include <cstddef>
 #include <vector>
+#include <mutex>
 #include <map>
 #include <string>
 #include <tuple>
+#include <GLES3/gl3.h>
 
 namespace mazeModel {
     using namespace std;
@@ -17,7 +19,7 @@ namespace mazeModel {
     /**
      * 点
      */
-    using Point = tuple<float,float>;
+    using Point = tuple<float, float>;
 
     struct {
         /**
@@ -25,15 +27,25 @@ namespace mazeModel {
          * @param gen 生成式集合
          * @return 一个点序列一个下标序列
          */
-        tuple<vector<Point>,vector<short>> (*getMaze) (multimap<char,string> const& gen);
+        tuple<vector<Point>, vector<short>> (*getMaze)(multimap<char, string> const &gen);
     } mazeGenerator;
-    multimap<char,string> lex;
+
+    multimap<char, string> lex;
 
     class MazeModel {
         vector<Point> points;
-        vector<short> indecies;
+        vector<unsigned short> indecies;
+        mutex mutex; /// 保证互斥
     public:
         MazeModel();
+        /**
+         * 刷新函数
+         */
+        void refresh();
+        /**
+         * 绘制函数
+         */
+        void draw(GLuint vertexId);
     };
 
 }

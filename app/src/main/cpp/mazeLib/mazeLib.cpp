@@ -20,12 +20,7 @@ GLfloat points [] = {
         -.4f,.7,0
 };
 
-std::vector<GLfloat> matrix = {
-        1,0,0,0,
-        0,1,0,0,
-        0,0,1,0,
-        0,0,0,1
-};
+std::vector<GLfloat> matrix;
 
 constexpr size_t elemOfCoord = 3;
 constexpr size_t vertexStride = elemOfCoord * sizeof(GLfloat);
@@ -43,6 +38,13 @@ MAZE_RENDERER(init) (JNIEnv *env, jobject, jstring vtxSrc, jstring vtxFrag) {
         return JNI_FALSE;
     }
 
+    matrix = {
+        1,0,0,0,
+        0,1,0,0,
+        0,0,1,0,
+        0,0,0,1
+    };
+
     colorHandler = static_cast<GLuint>(glGetUniformLocation(program, "vColor"));
     positionHanderler = static_cast<GLuint>(glGetAttribLocation(program, "vPos"));
     spinMatHandler = static_cast<GLuint>(glGetUniformLocation(program, "spinMatrix"));
@@ -53,18 +55,18 @@ MAZE_RENDERER(init) (JNIEnv *env, jobject, jstring vtxSrc, jstring vtxFrag) {
 
 
 JNIEXPORT void JNICALL
-MAZE_RENDERER(resize) (JNIEnv *env, jobject, jint width, jint height) {
+MAZE_RENDERER(resize) (JNIEnv *, jobject, jint width, jint height) {
     glViewport(0,0,width,height);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
 JNIEXPORT void JNICALL
-MAZE_RENDERER(step) (JNIEnv *env, jobject) {
+MAZE_RENDERER(step) (JNIEnv *, jobject) {
     static const auto zero = std::chrono::system_clock::now();
     auto cur = std::chrono::system_clock::now();
     std::chrono::duration<double,std::milli> mili = cur - zero;
     const double theta = (mili * omega).count();
-    const GLfloat c = GLfloat(cos(theta)),s = GLfloat(sin(theta)),cc = c*c,ss=s*s,cs=c*s;
+    const auto c = GLfloat(cos(theta)),s = GLfloat(sin(theta));
     matrix = {
             c,0,s,0,
             0,1,0,0,
@@ -84,5 +86,10 @@ MAZE_RENDERER(step) (JNIEnv *env, jobject) {
 
     glVertexAttribPointer(positionHanderler,elemOfCoord,GL_FLOAT,GL_FALSE,vertexStride,points);
     glDrawElements(GL_LINES,6,GL_UNSIGNED_SHORT,drawIndices);
+}
+
+JNIEXPORT void JNICALL
+MAZE_RENDERER(fresh) (JNIEnv *, jobject) {
+
 }
 }
