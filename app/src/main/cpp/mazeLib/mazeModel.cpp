@@ -15,11 +15,11 @@ namespace mazeModel {
         mutex.unlock();
     }
 
-    void MazeModel::draw(GLuint vertexId) {
+    void MazeModel::draw(GLuint positionHandler) {
         mutex.lock();
 
-        glVertexAttribPointer(vertexId,3,GL_FLOAT,GL_FALSE,0,points.data());
-        glDrawElements(GL_LINES,GLsizei(indecies.size()),GL_UNSIGNED_SHORT,indecies.data());
+        glVertexAttribPointer(positionHandler,2,GL_FLOAT,GL_FALSE,0,points.data());
+        glDrawElements(GL_LINE_LOOP,GLsizei(indecies.size()),GL_UNSIGNED_SHORT,indecies.data());
 
         mutex.unlock();
     }

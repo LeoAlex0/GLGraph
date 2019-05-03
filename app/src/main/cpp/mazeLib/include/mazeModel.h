@@ -21,7 +21,7 @@ namespace mazeModel {
      */
     using Point = tuple<float, float>;
 
-    struct {
+    extern struct MazeFunc{
         /**
          * 函数登记，迷宫的生成函数
          * @param gen 生成式集合
@@ -30,9 +30,9 @@ namespace mazeModel {
         tuple<vector<Point>, vector<unsigned short>> (*getMaze)(multimap<char, string> const &gen);
     } mazeGenerator;
 
-    multimap<char, string> lex;
+    extern multimap<char, string> lex;
 
-    class MazeModel {
+    extern class MazeModel {
         vector<Point> points;
         vector<unsigned short> indecies;
         mutex mutex; /// 保证互斥
@@ -45,8 +45,8 @@ namespace mazeModel {
         /**
          * 绘制函数
          */
-        void draw(GLuint vertexId);
-    };
+        void draw(GLuint positionHandler);
+    } mazeObject;
 
 }
 
