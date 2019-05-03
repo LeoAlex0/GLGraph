@@ -10,8 +10,10 @@ namespace mazeModel {
     }
 
     void MazeModel::refresh() {
+        auto ans = mazeGenerator.getMaze(lex);
+
         mutex.lock();
-        tie(points,indecies) = mazeGenerator.getMaze(lex);
+        tie(points,indecies) = std::move(ans);
         mutex.unlock();
     }
 
