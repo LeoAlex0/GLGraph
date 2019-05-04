@@ -1,7 +1,10 @@
 #version 300 es
 
-layout(location = 0) in vec4 vPos;
+in vec4 vPos;
 uniform mat4 spinMatrix;
+out float baseColor;
 void main() {
-    gl_Position = spinMatrix * vPos;
+    vec4 pos = spinMatrix * vPos;
+    gl_Position = pos;
+    baseColor = (1.0/pow(1e-5+abs(pos.z), 2.0f));
 }

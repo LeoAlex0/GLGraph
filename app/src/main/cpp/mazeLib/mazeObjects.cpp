@@ -20,12 +20,15 @@ namespace mazeModel {
         return make_tuple(points, drawIndices);
     }
 
+    void init() {}
+
     multimap<char, string> lex = {
             {'F', "RFRRRRFR"},
     };
 
     MazeFunc mazeGenerator = {
             .getMaze = getMaze,
+            .init = init
     };
 
     MazeModel mazeObject;

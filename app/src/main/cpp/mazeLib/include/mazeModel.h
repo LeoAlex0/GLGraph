@@ -28,6 +28,11 @@ namespace mazeModel {
          * @return 一个点序列一个下标序列
          */
         tuple<vector<Point>, vector<unsigned short>> (*getMaze)(multimap<char, string> const &gen);
+
+        /**
+         * 初始化函数，构造时调用
+         */
+        void (*init)();
     } mazeGenerator;
 
     extern multimap<char, string> lex;

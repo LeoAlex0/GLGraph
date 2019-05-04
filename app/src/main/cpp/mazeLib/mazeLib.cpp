@@ -29,8 +29,6 @@ MAZE_RENDERER(init) (JNIEnv *env, jobject, jstring vtxSrc, jstring vtxFrag) {
         return JNI_FALSE;
     }
 
-    glLineWidth(10);
-
     matrix = {
         1,0,0,0,
         0,1,0,0,

@@ -6,6 +6,7 @@
 
 namespace mazeModel {
     MazeModel::MazeModel() {
+        mazeGenerator.init();
         tie(points,indecies) = mazeGenerator.getMaze(lex);
     }
 
