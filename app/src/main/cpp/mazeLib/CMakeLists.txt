@@ -4,4 +4,4 @@
 # Sets the minimum version of CMake required to build the native library.
 
 include_directories(include)
-add_library(mazeLib SHARED mazeLib.cpp mazeModel.cpp mazeObjects.cpp)
+add_library(mazeLib SHARED mazeLib.cpp mazeModel.cpp mazeObjects.cpp repair.cpp)
