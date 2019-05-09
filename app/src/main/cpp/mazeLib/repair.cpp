@@ -2,14 +2,15 @@
 #include <tuple>
 #include <string>
 #include <cmath>
-#include <cstdlib>
-#include <ctime>
+#include <random>
 #include "mazeModel.h"
 #include "esUtil.h"
 
 constexpr float eps = 1e-3;
 const float pi = static_cast<const float>(acos(-1));
-using namespace std; 
+using namespace std;
+
+default_random_engine e;
 
 namespace mazeModel {
 
@@ -18,7 +19,7 @@ namespace mazeModel {
 	vector<int> jjiao;//现在的点对于平面来说的角度
 	void init()//初始化
 	{
-		srand(static_cast<unsigned int>(time(nullptr)));
+	    e.seed(static_cast<unsigned long>(time(nullptr)));
 	}
 
 	float dis(Point x, Point y) {
@@ -28,7 +29,6 @@ namespace mazeModel {
 	}
 
 	tuple<vector<Point>, vector<unsigned short> > free(int arc, vector<string> const &gen) {
-//		init();
 		poi.clear();
 		index.clear();
 		jjiao.clear();
@@ -63,7 +63,8 @@ namespace mazeModel {
             vector<int> newjjiao;
             int tot = 0;
             for (int i = 0; i < poi.size() - 1; i++) {
-                int cd = static_cast<int>(rand() % a.size());
+                //TODO: 随机化不足
+                int cd = uniform_int_distribution<int>(0,a.size()-1)(e);
                 int j;
                 for (j = 0; j < newpoi.size(); j++) {
                     if (dis(newpoi[j], poi[i]) < eps)
