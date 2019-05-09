@@ -13,10 +13,10 @@ using namespace std;
 
 namespace mazeModel {
 
-	vector<Point> poi;//µã¼¯
-	vector<unsigned short> index;//ÏÂ±ê
-	vector<int> jjiao;//ÏÖÔÚµÄµã¶ÔÓÚÆ½ÃæÀ´ËµµÄ½Ç¶È
-	void init()//³õÊ¼»¯
+	vector<Point> poi;//ç‚¹é›†
+	vector<unsigned short> index;//ä¸‹æ ‡
+	vector<int> jjiao;//ç°åœ¨çš„ç‚¹å¯¹äºå¹³é¢æ¥è¯´çš„è§’åº¦
+	void init()//åˆå§‹åŒ–
 	{
 		srand(static_cast<unsigned int>(time(nullptr)));
 	}
@@ -37,7 +37,8 @@ namespace mazeModel {
 		index.push_back(0);
 		index.push_back(1);
 		jjiao.push_back(0);
-		vector<vector<int> > suma;//¼ÇÂ¼Éú³ÉÊ½
+		vector<vector<int> > suma;//è®°å½•ç”Ÿæˆå¼
+		vector<int>a;a.push_back(0);a.push_back(0);suma.push_back(a);
 		for (const auto &j : gen) {
 			int q = 0;
 			vector<int> a;
@@ -55,14 +56,14 @@ namespace mazeModel {
 		}
 
 		int ff = 0;
-		while (ff == 0)//ÅĞ¶Ï¾«¶ÈÊÇ·ñ¹»
+		while (ff == 0)//åˆ¤æ–­ç²¾åº¦æ˜¯å¦å¤Ÿ
 		{
 			vector<Point> newpoi;
 			vector<unsigned short> newindex;
 			vector<int> newjjiao;
 			int tot = 0;
 			for (int i = 0; i < poi.size() - 1; i++) {
-				int cd = static_cast<int>(rand() % gen.size());
+				int cd = static_cast<int>(rand() % a.size());
 				int j;
 				for (j = 0; j < newpoi.size(); j++) {
 					if (dis(newpoi[j],poi[i]) < eps)
@@ -102,14 +103,14 @@ namespace mazeModel {
 						newindex.push_back(k);
 						newjjiao.push_back(size);
 					}
-					if (tot > 65530)
+					if (tot > 32768)
 						break;
 					ALOGE("233");
 				}
-				if (tot > 65530)
+				if (tot > 32768)
 					break;
 			}
-			if (tot <= 65530) {
+			if (tot <= 32768) {
 				poi = newpoi;
 				jjiao = newjjiao;
 				index = newindex;
