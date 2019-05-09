@@ -6,6 +6,7 @@
 #include <chrono>
 #include <cmath>
 #include <vector>
+#include <thread>
 #include "esUtil.h"
 #include "mazeModel.h"
 
@@ -77,6 +78,6 @@ MAZE_RENDERER(step) (JNIEnv *, jobject) {
 
 JNIEXPORT void JNICALL
 MAZE_RENDERER(refresh) (JNIEnv *, jobject) {
-    mazeModel::mazeObject.refresh();
+    std::thread([&](){mazeModel::mazeObject.refresh();}).detach();
 }
 }

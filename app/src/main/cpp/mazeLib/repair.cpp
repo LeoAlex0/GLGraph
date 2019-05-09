@@ -7,8 +7,8 @@
 #include "mazeModel.h"
 #include "esUtil.h"
 
-#define pi acos(-1)
 constexpr float eps = 1e-3;
+const float pi = static_cast<const float>(acos(-1));
 using namespace std; 
 
 namespace mazeModel {
@@ -57,77 +57,76 @@ namespace mazeModel {
 
 		int ff = 0;
 		while (ff == 0)//判断精度是否够
-		{
-			vector<Point> newpoi;
-			vector<unsigned short> newindex;
-			vector<int> newjjiao;
-			int tot = 0;
-			for (int i = 0; i < poi.size() - 1; i++) {
-				int cd = static_cast<int>(rand() % a.size());
-				int j;
-				for (j = 0; j < newpoi.size(); j++) {
-					if (dis(newpoi[j],poi[i]) < eps)
-						break;
-				}
-				if (j == newpoi.size()) {
-					newpoi.push_back(poi[i]);
-					newjjiao.push_back((jjiao[i] + suma[cd][0]) % 360);
-					newindex.push_back(tot++);
-				} else {
-					newindex.push_back(j);
-					newjjiao.push_back((jjiao[i] + suma[cd][0]) % 360);
-				}
-				float l = dis(poi[i], poi[i + 1]);
-				if (l < eps)
-					ff = 1;
-				for (j = 1; j < suma[cd].size(); j++) {
-					int size = newjjiao[newjjiao.size() - 1] + suma[cd][j];
-					size %= 360;
+        {
+            vector<Point> newpoi;
+            vector<unsigned short> newindex;
+            vector<int> newjjiao;
+            int tot = 0;
+            for (int i = 0; i < poi.size() - 1; i++) {
+                int cd = static_cast<int>(rand() % a.size());
+                int j;
+                for (j = 0; j < newpoi.size(); j++) {
+                    if (dis(newpoi[j], poi[i]) < eps)
+                        break;
+                }
+                if (j == newpoi.size()) {
+                    newpoi.push_back(poi[i]);
+                    newjjiao.push_back((jjiao[i] + suma[cd][0]) % 360);
+                    newindex.push_back(tot++);
+                } else {
+                    newindex.push_back(j);
+                    newjjiao.push_back((jjiao[i] + suma[cd][0]) % 360);
+                }
+                float l = dis(poi[i], poi[i + 1]);
+                if (l < eps)
+                    ff = 1;
+                for (j = 1; j < suma[cd].size(); j++) {
+                    int size = newjjiao[newjjiao.size() - 1] + suma[cd][j];
+                    size %= 360;
 
-					auto [lx,ly] = newpoi.back();
-					auto nx = lx+ l / 3.0 * cos(newjjiao.back() * pi / 180.0);
-					auto ny = ly+l / 3.0 * sin(newjjiao.back() * pi / 180.0);
-					Point p(nx,ny);
+                    auto[lx, ly] = newpoi.back();
+                    auto nx = lx + l / 3.0 * cos(newjjiao.back() * pi / 180.0);
+                    auto ny = ly + l / 3.0 * sin(newjjiao.back() * pi / 180.0);
+                    Point p(nx, ny);
 //					p.x = newpoi[newpoi.size() - 1].x + l / 3.0 * cos(newjjiao[newjjiao.size() - 1] * pi / 180.0);
 //					p.y = newpoi[newpoi.size() - 1].y + l / 3.0 * sin(newjjiao[newjjiao.size() - 1] * pi / 180.0);
-					int k;
-					for (k = 0; k < newpoi.size(); k++) {
+                    int k;
+                    for (k = 0; k < newpoi.size(); k++) {
                         if (dis(newpoi[j], p) < eps)
                             break;
                     }
-					if (k == newpoi.size()) {
-						newpoi.push_back(p);
-						newjjiao.push_back(size);
-						newindex.push_back(tot++);
-					} else {
-						newindex.push_back(k);
-						newjjiao.push_back(size);
-					}
-					if (tot > 32768)
-						break;
-					ALOGE("233");
-				}
-				if (tot > 32768)
-					break;
-			}
-			if (tot <= 32768) {
-				poi = newpoi;
-				jjiao = newjjiao;
-				index = newindex;
-				poi.emplace_back(1, 0);
-				jjiao.push_back(0);
-				int i;
-				for (i = 0; i < poi.size(); i++) {
-					if (dis(poi[i],Point(1.f,0.f))<eps)
-						break;
-				}
-				if (i == poi.size())
-					index.push_back(tot++);
-				else
-					index.push_back(i);
-			} else
-				ff = 1;
-		}
+                    if (k == newpoi.size()) {
+                        newpoi.push_back(p);
+                        newjjiao.push_back(size);
+                        newindex.push_back(tot++);
+                    } else {
+                        newindex.push_back(k);
+                        newjjiao.push_back(size);
+                    }
+                    if (tot > 32768)
+                        break;
+                }
+                if (tot > 32768)
+                    break;
+            }
+            if (tot <= 32768) {
+                poi = std::move(newpoi);
+                jjiao = std::move(newjjiao);
+                index = std::move(newindex);
+                poi.emplace_back(1, 0);
+                jjiao.push_back(0);
+                int i;
+                for (i = 0; i < poi.size(); i++) {
+                    if (dis(poi[i], Point(1.f, 0.f)) < eps)
+                        break;
+                }
+                if (i == poi.size())
+                    index.push_back(tot++);
+                else
+                    index.push_back(i);
+            } else
+                ff = 1;
+        }
 		tuple<vector<Point>, vector<unsigned short> > tp(std::move(poi), std::move(index));
 		/*FILE *fp;
         fp=fopen("out.txt","w");

@@ -7,15 +7,19 @@
 namespace mazeModel {
     MazeModel::MazeModel() {
         mazeGenerator.init();
-        tie(points,indecies) = mazeGenerator.getMaze(60,lex);
+        tie(points,indecies) = std::move(mazeGenerator.getMaze(60,lex));
     }
 
     void MazeModel::refresh() {
+        if (!refreshing.try_lock())
+            return;
         auto ans = mazeGenerator.getMaze(60,lex);
 
         mutex.lock();
         tie(points,indecies) = std::move(ans);
         mutex.unlock();
+
+        refreshing.unlock();
     }
 
     void MazeModel::draw(GLuint positionHandler) {

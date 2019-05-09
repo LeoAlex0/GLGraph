@@ -41,7 +41,7 @@ namespace mazeModel {
     extern class MazeModel {
         vector<Point> points;
         vector<unsigned short> indecies;
-        mutex mutex; /// 保证互斥
+        mutex mutex,refreshing; /// 保证互斥
     public:
         MazeModel();
         /**
