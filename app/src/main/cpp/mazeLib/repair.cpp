@@ -138,23 +138,9 @@ namespace mazeModel {
 		return tp;
 	}
 
-	struct MazeFunc mazeGenerator {
+	struct MazeFunc CD_GENERATOR {
 		.getMaze = free,
 		.init = init
 	};
-/*int main()
-{
-	vector<string>s;
-	string c;
-	while(cin>>c)
-	{
-		if(c=="0")
-			break;
-		s.push_back(c);
-	}
-	int arc;
-	cin>>arc;
-	free(arc,s);
-}*/
 
 }

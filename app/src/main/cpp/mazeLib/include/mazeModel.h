@@ -20,6 +20,8 @@ namespace mazeModel {
      * 点
      */
     using Point = tuple<float, float>;
+    Point operator+ (Point const&,Point const&);
+    Point operator- (Point const&,Point const&);
 
     extern struct MazeFunc{
         /**
@@ -55,5 +57,15 @@ namespace mazeModel {
     } mazeObject;
 
 }
+
+#define GENERATOR ChenDu
+
+#if GENERATOR == zLeoAlex
+#define LEO_GENERATOR mazeGenerator
+#define CD_GENERATOR mazeGenerator_
+#else
+#define CD_GENERATOR mazeGenerator
+#define LEO_GENERATOR mazeGenerator_
+#endif
 
 #endif //GLGRAPH_MAZEMODEL_H
