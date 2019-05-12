@@ -20,8 +20,6 @@ namespace mazeModel {
      * 点
      */
     using Point = tuple<float, float>;
-    Point operator+ (Point const&,Point const&);
-    Point operator- (Point const&,Point const&);
 
     extern struct MazeFunc{
         /**
@@ -58,9 +56,14 @@ namespace mazeModel {
 
 }
 
-#define GENERATOR ChenDu
+mazeModel::Point operator+(mazeModel::Point const &, mazeModel::Point const &);
 
-#if GENERATOR == zLeoAlex
+mazeModel::Point operator-(mazeModel::Point const &, mazeModel::Point const &);
+
+
+#define GENERATOR 1
+
+#if GENERATOR == 1
 #define LEO_GENERATOR mazeGenerator
 #define CD_GENERATOR mazeGenerator_
 #else
