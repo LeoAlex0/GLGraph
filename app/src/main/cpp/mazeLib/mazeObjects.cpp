@@ -4,6 +4,8 @@
 
 #include "mazeModel.h"
 #include <vector>
+#include <mazeModel.h>
+
 
 namespace mazeModel {
 

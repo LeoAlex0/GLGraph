@@ -33,7 +33,7 @@ MAZE_RENDERER(init) (JNIEnv *env, jobject, jstring vtxSrc, jstring vtxFrag) {
     matrix = {
         1,0,0,0,
         0,1,0,0,
-        0,0,1,0,
+        0,0,1,1,
         0,0,0,1
     };
 
@@ -62,7 +62,7 @@ MAZE_RENDERER(step) (JNIEnv *, jobject) {
     matrix = {
             c,0,s,0,
             0,1,0,0,
-            s,0,c,0,
+            s,0,c,1,
             0,0,0,1
     };
 

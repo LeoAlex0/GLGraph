@@ -30,17 +30,29 @@ namespace mazeModel {
 
         mutex.unlock();
     }
+
+//    Point operator+(Point const & a, Point const & b) {
+//        const auto [x1,y1] = a;
+//        const auto [x2,y2] = b;
+//        return Point(x1+x2,y1+y2);
+//    }
+//
+//    Point operator-(Point const & a, Point const & b) {
+//        const auto [x1,y1] = a;
+//        const auto [x2,y2] = b;
+//        return Point(x1-x2,y1-y2);
+//    }
 }
 
 using namespace mazeModel;
 
-Point operator+(Point const &a, Point const &b) {
+Point operator + (Point const &a, Point const &b) {
     auto[x1, y1] = a;
     auto[x2, y2] = b;
     return Point(x1 + x2, y1 + y2);
 }
 
-Point operator-(Point const &a, Point const &b) {
+Point operator - (Point const &a, Point const &b) {
     auto[x1, y1] = a;
     auto[x2, y2] = b;
     return Point(x1 - x2, y1 - y2);
