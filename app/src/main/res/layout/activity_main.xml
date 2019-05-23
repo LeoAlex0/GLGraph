@@ -8,7 +8,7 @@
         tools:context=".MainActivity">
 
     <org.zleoalex.glgraph.gl.GL2SurfaceView android:layout_width="match_parent" android:layout_height="match_parent"
-                                            tools:layout_editor_absoluteY="0dp" tools:layout_editor_absoluteX="-43dp"
+                                            tools:layout_editor_absoluteY="0dp" tools:layout_editor_absoluteX="16dp"
                                             android:id="@+id/surface"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"

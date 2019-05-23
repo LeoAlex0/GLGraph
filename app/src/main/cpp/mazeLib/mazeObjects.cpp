@@ -10,8 +10,9 @@
 namespace mazeModel {
 
     vector<string> lex = {
-            "F-F++F-F",
-            "F+F--F+F",
+            "F-FF++FF---FFF",
+           "F+F--F+F",
+           "F-F+++FFF--F",
     };
 
     MazeModel mazeObject;
