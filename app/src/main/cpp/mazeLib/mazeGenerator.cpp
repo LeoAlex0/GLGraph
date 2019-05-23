@@ -16,10 +16,9 @@ using mazeModel::Point;
 constexpr float eps = 1e-2;
 static float pi;
 
-static default_random_engine *e;
+static default_random_engine e(u_long(time(nullptr)));
 
 static void init() {
-    e = new default_random_engine(u_long(time(nullptr)));
     pi = acosf(-1);
 }
 
@@ -99,7 +98,7 @@ getMaze(int arc, vector<string> const &gen) {
         string newS;
         for (auto c:s) {
             if (c == 'F') {
-                size_t rd = u(*e);
+                size_t rd = u(e);
                 if (rd == 0) newS += "FFF";
                 else newS += gen[rd - 1];
             } else newS += c;
