@@ -16,6 +16,6 @@
             android:clickable="true" app:srcCompat="@android:drawable/ic_popup_sync"
             android:id="@+id/refreshButton" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="20dp" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp" android:focusable="true"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
